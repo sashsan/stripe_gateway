@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <p style="color: green"><%= notice %></p>
+
+    <h1>Products</h1>
+
+    <table class="table table-responsive">
+      <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <% @products.each do |product| %>
+          <th scope="row"><%= product.name %></th>
+          <th scope="row"><%= product.price %></th>
+          <th scope="row"><%= link_to "Show product", product %></th>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+
+    <%= link_to "New product", new_product_path %>
+
+  </div>
+</div>
