@@ -7,18 +7,30 @@
     <table class="table table-responsive">
       <thead>
       <tr>
-        <th scope="col">Product</th>
+        <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th>Sales count</th>
+        <th scope="col">Payment</th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <% @products.each do |product| %>
+      <% @products.each do |product| %>
+        <tr>
           <th scope="row"><%= product.name %></th>
-          <th scope="row"><%= product.price %></th>
-          <th scope="row"><%= link_to "Show product", product %></th>
-        <% end %>
-      </tr>
+          <th scope="row"><%= number_to_currency(product.price / 100) %></th>
+          <th scope="row" style="text-align:center"><%= product.try(:sales_count) || 0 %></th>
+          <th scope="row">
+            <%= button_to 'Buy now!', checkouts_path,
+                          remote: true,
+                          params: { product_id: product.id },
+                          class: "btn btn-secondary btn-sm" %>
+          </th>
+          <th scope="row"><%= link_to 'Show', product %></th>
+          <th scope="row"><%= link_to 'Edit', edit_product_path(product) %></th>
+          <th scope="row"><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+        </tr>
+      <% end %>
       </tbody>
     </table>
 
